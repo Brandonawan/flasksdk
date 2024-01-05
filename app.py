@@ -1,12 +1,14 @@
+# app.py
 from flask import Flask
 from my_logger import BackgroundLogger
 
 app = Flask(__name__)
 
 # Configure the BackgroundLogger within app.py
-server_url = 'http://127.0.0.1:8080/error_logger/log_error/'
+server_url = 'http://127.0.0.1:8080/error_tracker/log_error/'
 background_logger = BackgroundLogger(app)
 background_logger.set_server_url(server_url)
+background_logger.set_api_key('9GuUlt-SrAULInhXBEtFhpwiXScB6IcQVUhZKFHht4s')  # Replace with the actual API key
 
 @app.route('/')
 def home():
@@ -18,25 +20,16 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 
-
-# import sentry_sdk
+# #app.py
 # from flask import Flask
 # from my_logger import BackgroundLogger
 
 # app = Flask(__name__)
 
-# # Initialize BackgroundLogger
+# # Configure the BackgroundLogger within app.py
+# server_url = 'http://127.0.0.1:8080/error_tracker/log_error/'
 # background_logger = BackgroundLogger(app)
-# sentry_sdk.init(
-#     dsn="https://0bbf1249f04175c23821d73ba7528cd5@o4506343604355072.ingest.sentry.io/4506348737134592",
-#     # Set traces_sample_rate to 1.0 to capture 100%
-#     # of transactions for performance monitoring.
-#     traces_sample_rate=1.0,
-#     # Set profiles_sample_rate to 1.0 to profile 100%
-#     # of sampled transactions.
-#     # We recommend adjusting this value in production.
-#     profiles_sample_rate=1.0,
-# )
+# background_logger.set_server_url(server_url)
 
 # @app.route('/')
 # def home():
@@ -46,5 +39,8 @@ if __name__ == '__main__':
 
 # if __name__ == '__main__':
 #     app.run(debug=True)
+
+
+
 
 

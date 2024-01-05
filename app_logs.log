@@ -1,47 +1,112 @@
-2023-12-06 13:31:00,113 [ERROR] An error occurred:
+2024-01-05 16:35:33,461 [ERROR] Request details: IP=127.0.0.1, User-Agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36, Endpoint=home, Method=GET, URL=http://127.0.0.1:5000/
+2024-01-05 16:35:33,464 [ERROR] An error occurred:
 Traceback (most recent call last):
-  File "/home/brandon/.local/lib/python3.8/site-packages/flask/app.py", line 1458, in wsgi_app
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 1458, in wsgi_app
     response = self.handle_exception(e)
-  File "/home/brandon/.local/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
     response = self.full_dispatch_request()
-  File "/home/brandon/.local/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/home/brandon/.local/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/home/brandon/.local/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/brandon/Documents/flask/app.py", line 23, in home
+  File "/home/brandon/Desktop/flasksdk/app.py", line 14, in home
     result = 1 / 0  # Intentional division by zero to trigger an error (replace with your actual code)
 ZeroDivisionError: division by zero
-2023-12-06 14:41:54,881 [ERROR] Request details: IP=127.0.0.1, User-Agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36, Endpoint=home, Method=GET, URL=http://127.0.0.1:5000/
-2023-12-06 14:41:54,881 [ERROR] An error occurred:
+2024-01-05 17:31:20,079 [ERROR] Request details: IP=127.0.0.1, User-Agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36, Endpoint=home, Method=GET, URL=http://127.0.0.1:5000/
+2024-01-05 17:31:20,096 [ERROR] An error occurred:
 Traceback (most recent call last):
-  File "/home/brandon/.local/lib/python3.8/site-packages/flask/app.py", line 1458, in wsgi_app
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 1458, in wsgi_app
     response = self.handle_exception(e)
-  File "/home/brandon/.local/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
     response = self.full_dispatch_request()
-  File "/home/brandon/.local/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/home/brandon/.local/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/home/brandon/.local/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/brandon/Documents/flask/app.py", line 14, in home
+  File "/home/brandon/Desktop/flasksdk/app.py", line 16, in home
     result = 1 / 0  # Intentional division by zero to trigger an error (replace with your actual code)
 ZeroDivisionError: division by zero
-2023-12-06 15:52:25,917 [ERROR] Request details: IP=127.0.0.1, User-Agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36, Endpoint=home, Method=GET, URL=http://127.0.0.1:5000/
-2023-12-06 15:52:25,917 [ERROR] An error occurred:
+2024-01-05 17:55:37,779 [ERROR] Request details: IP=127.0.0.1, User-Agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36, Endpoint=home, Method=GET, URL=http://127.0.0.1:5000/
+2024-01-05 17:55:37,779 [ERROR] An error occurred:
 Traceback (most recent call last):
-  File "/home/brandon/.local/lib/python3.8/site-packages/flask/app.py", line 1458, in wsgi_app
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 1458, in wsgi_app
     response = self.handle_exception(e)
-  File "/home/brandon/.local/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
     response = self.full_dispatch_request()
-  File "/home/brandon/.local/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/home/brandon/.local/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/home/brandon/.local/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/brandon/Documents/flask/app.py", line 14, in home
+  File "/home/brandon/Desktop/flasksdk/app.py", line 16, in home
+    result = 1 / 0  # Intentional division by zero to trigger an error (replace with your actual code)
+ZeroDivisionError: division by zero
+2024-01-05 18:05:15,905 [ERROR] Request details: IP=127.0.0.1, User-Agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36, Endpoint=home, Method=GET, URL=http://127.0.0.1:5000/
+2024-01-05 18:05:15,905 [ERROR] An error occurred:
+Traceback (most recent call last):
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 1458, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/brandon/Desktop/flasksdk/app.py", line 16, in home
+    result = 1 / 0  # Intentional division by zero to trigger an error (replace with your actual code)
+ZeroDivisionError: division by zero
+2024-01-05 18:08:11,936 [ERROR] Request details: IP=127.0.0.1, User-Agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36, Endpoint=home, Method=GET, URL=http://127.0.0.1:5000/
+2024-01-05 18:08:11,936 [ERROR] An error occurred:
+Traceback (most recent call last):
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 1458, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/brandon/Desktop/flasksdk/app.py", line 16, in home
+    result = 1 / 0  # Intentional division by zero to trigger an error (replace with your actual code)
+ZeroDivisionError: division by zero
+2024-01-05 18:27:11,803 [ERROR] Request details: IP=127.0.0.1, User-Agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36, Endpoint=home, Method=GET, URL=http://127.0.0.1:5000/
+2024-01-05 18:27:11,804 [ERROR] An error occurred:
+Traceback (most recent call last):
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 1458, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/brandon/Desktop/flasksdk/app.py", line 16, in home
+    result = 1 / 0  # Intentional division by zero to trigger an error (replace with your actual code)
+ZeroDivisionError: division by zero
+2024-01-05 18:33:18,969 [ERROR] Request details: IP=127.0.0.1, User-Agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36, Endpoint=home, Method=GET, URL=http://127.0.0.1:5000/
+2024-01-05 18:33:18,969 [ERROR] An error occurred:
+Traceback (most recent call last):
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 1458, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/brandon/Desktop/flasksdk/env/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/brandon/Desktop/flasksdk/app.py", line 16, in home
     result = 1 / 0  # Intentional division by zero to trigger an error (replace with your actual code)
 ZeroDivisionError: division by zero

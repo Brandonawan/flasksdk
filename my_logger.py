@@ -1,5 +1,7 @@
+# my_logger.py
 import logging
 from logging.handlers import RotatingFileHandler
+import sys
 from flask import request, g
 import time
 import requests
@@ -9,6 +11,7 @@ class BackgroundLogger:
     def __init__(self, app=None, log_file='app_logs.log'):
         self.app = None
         self.server_url = None  # The server URL will be set from app.py
+        self.api_key = None  # The API key will be set from app.py
         self.setup_logger(log_file)
         if app:
             self.init_app(app)
@@ -20,6 +23,9 @@ class BackgroundLogger:
 
     def set_server_url(self, server_url):
         self.server_url = server_url
+
+    def set_api_key(self, api_key):
+        self.api_key = api_key
 
     def setup_logger(self, log_file):
         formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(message)s')
@@ -53,8 +59,11 @@ class BackgroundLogger:
     def send_error_to_server(self, exception):
         if not self.server_url:
             raise ValueError("Server URL is not set. Call set_server_url before using the logger.")
+        if not self.api_key:
+            raise ValueError("API Key is not set. Call set_api_key before using the logger.")
 
         error_data = {
+            'api_key': self.api_key,
             'error_type': 'Server Error',  # You might want to categorize errors based on the exception type
             'error_name': str(exception),
             'error_message': str(exception),
@@ -64,6 +73,7 @@ class BackgroundLogger:
             'browser': self.get_browser(request.headers.get('User-Agent')),
             'os': self.get_os(request.headers.get('User-Agent')),
             'breadcrumbs': '{}',  # You can customize this based on your application's breadcrumb data
+            'code_snippet': self.get_code_snippet(exception),
         }
 
         try:
@@ -82,3 +92,19 @@ class BackgroundLogger:
     def get_stack_trace(self, exception):
         import traceback
         return traceback.format_exc()
+
+    def get_code_snippet(self, exception):
+        import linecache
+        import traceback
+
+        exc_type, exc_value, tb = sys.exc_info()
+        last_frame = traceback.extract_tb(tb)[-1]
+
+        # Load the source file
+        source_file = last_frame[0]
+        source_line_number = last_frame[1]
+        source_code = linecache.getline(source_file, source_line_number).strip()
+
+        return source_code
+
+
