@@ -1,6 +1,5 @@
 # my_logger.py
 import logging
-from logging.handlers import RotatingFileHandler
 import sys
 from flask import request, g
 import time
@@ -8,11 +7,10 @@ import requests
 import json
 
 class BackgroundLogger:
-    def __init__(self, app=None, log_file='app_logs.log'):
+    def __init__(self, app=None):
         self.app = None
         self.server_url = None  # The server URL will be set from app.py
         self.api_key = None  # The API key will be set from app.py
-        self.setup_logger(log_file)
         if app:
             self.init_app(app)
 
@@ -27,16 +25,12 @@ class BackgroundLogger:
     def set_api_key(self, api_key):
         self.api_key = api_key
 
-    def setup_logger(self, log_file):
+    def setup_logger(self):
         formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(message)s')
 
-        handler = RotatingFileHandler(log_file, maxBytes=10000, backupCount=1)
-        handler.setLevel(logging.ERROR)  # Log only errors
-        handler.setFormatter(formatter)
-
+        # Remove the file handler
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.ERROR)  # Log only errors
-        self.logger.addHandler(handler)
 
     def before_request(self):
         g.request_start_time = time.time()
@@ -106,5 +100,3 @@ class BackgroundLogger:
         source_code = linecache.getline(source_file, source_line_number).strip()
 
         return source_code
-
-
