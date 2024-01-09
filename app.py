@@ -1,6 +1,6 @@
 # app.py
 from flask import Flask
-from my_logger import BackgroundLogger
+from faultpilot_logger import BackgroundLogger
 
 app = Flask(__name__)
 
@@ -13,7 +13,7 @@ background_logger.set_api_key('1KUuD6vguT--9QveQpiV17xnSMFI1N7-XQslyi5JYRI')  # 
 @app.route('/')
 def home():
     # Your normal route logic here
-    result = "2" + 2  # Intentional division by zero to trigger an error (replace with your actual code)
+    result = "2" + 2 # This will cause an error
     return f'Result: {result}'
 
 if __name__ == '__main__':
