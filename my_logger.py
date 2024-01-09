@@ -1,5 +1,5 @@
-# my_logger.py
 import logging
+from logging.handlers import RotatingFileHandler
 import sys
 from flask import request, g
 import time
@@ -7,13 +7,12 @@ import requests
 import json
 
 class BackgroundLogger:
-    def __init__(self, app=None):
+    def __init__(self, app=None, log_file='error.log'):
         self.app = None
-        self.server_url = None  # The server URL will be set from app.py
-        self.api_key = None  # The API key will be set from app.py
         self.server_url = None
         self.api_key = None
-        self.setup_logger(log_file)
+        self.log_file = log_file
+        self.setup_logger()
         if app:
             self.init_app(app)
 
@@ -31,9 +30,13 @@ class BackgroundLogger:
     def setup_logger(self):
         formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(message)s')
 
-        # Remove the file handler
+        handler = RotatingFileHandler(self.log_file, maxBytes=10000, backupCount=1)
+        handler.setLevel(logging.ERROR)
+        handler.setFormatter(formatter)
+
         self.logger = logging.getLogger(__name__)
-        self.logger.setLevel(logging.ERROR)  # Log only errors
+        self.logger.setLevel(logging.ERROR)
+        self.logger.addHandler(handler)
 
     def before_request(self):
         g.request_start_time = time.time()
@@ -48,16 +51,15 @@ class BackgroundLogger:
             elapsed_time = time.time() - g.request_start_time
 
             self.logger.error(f'Request details: IP={ip_address}, User-Agent={user_agent}, Endpoint={endpoint}, Method={method}, URL={url}')
-            self.logger.exception(f'An error occurred:')
+            self.logger.exception('An error occurred:')
 
             # Send error data to the server
             self.send_error_to_server(exception)
 
     def send_error_to_server(self, exception):
-        if not self.server_url:
-            raise ValueError("Server URL is not set. Call set_server_url before using the logger.")
-        if not self.api_key:
-            raise ValueError("API Key is not set. Call set_api_key before using the logger.")
+        if not self.server_url or not self.api_key:
+            self.logger.warning("Server URL or API Key is not set. Cannot send error data.")
+            return
 
         error_data = {
             'api_key': self.api_key,
@@ -76,7 +78,7 @@ class BackgroundLogger:
         try:
             response = requests.post(self.server_url, json=error_data)
             response.raise_for_status()
-            self.logger.info(f'Successfully sent error data to the server.')
+            self.logger.info('Successfully sent error data to the server.')
         except requests.RequestException as e:
             self.logger.warning(f'Failed to send error data to the server: {e}')
 
