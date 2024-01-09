@@ -10,8 +10,8 @@ import json
 class BackgroundLogger:
     def __init__(self, app=None, log_file='app_logs.log'):
         self.app = None
-        self.server_url = None  # The server URL will be set from app.py
-        self.api_key = None  # The API key will be set from app.py
+        self.server_url = None
+        self.api_key = None
         self.setup_logger(log_file)
         if app:
             self.init_app(app)
@@ -31,11 +31,11 @@ class BackgroundLogger:
         formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(message)s')
 
         handler = RotatingFileHandler(log_file, maxBytes=10000, backupCount=1)
-        handler.setLevel(logging.ERROR)  # Log only errors
+        handler.setLevel(logging.ERROR)
         handler.setFormatter(formatter)
 
         self.logger = logging.getLogger(__name__)
-        self.logger.setLevel(logging.ERROR)  # Log only errors
+        self.logger.setLevel(logging.ERROR)
         self.logger.addHandler(handler)
 
     def before_request(self):
@@ -64,7 +64,7 @@ class BackgroundLogger:
 
         error_data = {
             'api_key': self.api_key,
-            'error_type': 'Server Error',  # You might want to categorize errors based on the exception type
+            'error_type': self.get_error_type(exception),
             'error_name': str(exception),
             'error_message': str(exception),
             'stack_trace': self.get_stack_trace(exception),
@@ -72,7 +72,7 @@ class BackgroundLogger:
             'user_agent': request.headers.get('User-Agent'),
             'browser': self.get_browser(request.headers.get('User-Agent')),
             'os': self.get_os(request.headers.get('User-Agent')),
-            'breadcrumbs': '{}',  # You can customize this based on your application's breadcrumb data
+            'breadcrumbs': '{}',
             'code_snippet': self.get_code_snippet(exception),
         }
 
@@ -82,6 +82,9 @@ class BackgroundLogger:
             self.logger.info(f'Successfully sent error data to the server.')
         except requests.RequestException as e:
             self.logger.warning(f'Failed to send error data to the server: {e}')
+
+    def get_error_type(self, exception):
+        return type(exception).__name__
 
     def get_browser(self, user_agent):
         return user_agent.split()[0] if user_agent else 'Unknown Browser'
@@ -100,11 +103,8 @@ class BackgroundLogger:
         exc_type, exc_value, tb = sys.exc_info()
         last_frame = traceback.extract_tb(tb)[-1]
 
-        # Load the source file
         source_file = last_frame[0]
         source_line_number = last_frame[1]
         source_code = linecache.getline(source_file, source_line_number).strip()
 
         return source_code
-
-
