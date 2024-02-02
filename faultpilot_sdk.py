@@ -1,10 +1,10 @@
-import logging
-from logging.handlers import RotatingFileHandler
-import sys
+from loguru import logger
 from flask import request, g
 import time
 import requests
 import json
+import sys
+import traceback
 
 class BackgroundLogger:
     def __init__(self, app=None, log_file='error.log'):
@@ -28,15 +28,8 @@ class BackgroundLogger:
         self.api_key = api_key
 
     def setup_logger(self):
-        formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(message)s')
-
-        handler = RotatingFileHandler(self.log_file, maxBytes=10000, backupCount=1)
-        handler.setLevel(logging.ERROR)
-        handler.setFormatter(formatter)
-
-        self.logger = logging.getLogger(__name__)
-        self.logger.setLevel(logging.ERROR)
-        self.logger.addHandler(handler)
+        self.logger = logger
+        self.logger.add(self.log_file, rotation="10 MB", level="ERROR")
 
     def before_request(self):
         g.request_start_time = time.time()
@@ -92,12 +85,10 @@ class BackgroundLogger:
         return user_agent.split()[-1] if user_agent else 'Unknown OS'
 
     def get_stack_trace(self, exception):
-        import traceback
         return traceback.format_exc()
 
     def get_code_snippet(self, exception):
         import linecache
-        import traceback
 
         exc_type, exc_value, tb = sys.exc_info()
         last_frame = traceback.extract_tb(tb)[-1]

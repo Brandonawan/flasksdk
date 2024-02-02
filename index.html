@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error Tracker Example</title>
+  <!-- Include the error tracker script -->
+  <script>
+    // Array to store breadcrumbs
+    const breadcrumbs = [];
+
+    // Function to add a breadcrumb
+    function addBreadcrumb(crumb) {
+      breadcrumbs.push(crumb);
+    }
+
+    // Function to send error data
+    function sendErrorData(event) {
+      const errorData = {
+        error_type: event.error.name,
+        error_message: event.message,
+        stack_trace: event.error.stack,
+        url: window.location.href,
+        user_agent: navigator.userAgent,
+        browser: getBrowser(navigator.userAgent),
+        os: getOS(navigator.userAgent),
+        breadcrumbs: JSON.stringify(breadcrumbs),
+        code_snippet: getCodeSnippet(event),
+      };
+
+      // Log the error data to the console
+      console.error('Client-side error:', errorData);
+
+      // Clear breadcrumbs after logging error
+      breadcrumbs.length = 0;
+    }
+  
+    // Function to get browser name
+    function getBrowser(userAgent) {
+      return userAgent.split(' ')[0] || 'Unknown Browser';
+    }
+  
+    // Function to get operating system
+    function getOS(userAgent) {
+      return userAgent.split(' ').pop() || 'Unknown OS';
+    }
+  
+    // Function to get code snippet
+    function getCodeSnippet(event) {
+      if (event.error) {
+        // Check if the error occurred in a script
+        const scriptElement = event.target;
+        if (scriptElement && scriptElement.tagName && scriptElement.tagName.toLowerCase() === 'script') {
+          const scriptSource = scriptElement.src;
+          return `Failed to load script: ${scriptSource}`;
+        }
+      }
+      return 'N/A';
+    }
+  
+    // Event listener for navigation
+    window.addEventListener('beforeunload', function (event) {
+      // Add a breadcrumb for navigation with the last visible page before the error
+      addBreadcrumb({
+        event_type: 'navigation',
+        timestamp: new Date().toISOString(),
+        from: document.referrer,
+        to: window.location.href,
+      });
+    });
+  
+    // Event listener for error
+    window.addEventListener('error', function (event) {
+      // Add a breadcrumb for this event
+      addBreadcrumb({
+        event_type: 'error',
+        timestamp: new Date().toISOString(),
+      });
+  
+      // Log other relevant data and send error data
+      sendErrorData(event);
+    });
+  
+    // Other event listeners and breadcrumbs can be added as needed
+  </script>
+</head>
+<body>
+
+  <h1>Error Tracker Example</h1>
+
+  <p>This is a simple HTML file demonstrating the use of the error tracker script.</p>
+
+  <script>
+    // Intentional error to trigger the error tracker
+    nonExistentFunction();  // This function does not exist
+  </script>
+
+</body>
+</html>
